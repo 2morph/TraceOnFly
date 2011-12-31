@@ -1,0 +1,1 @@
+optimierung bei opengl line erstellung-> viele redundant

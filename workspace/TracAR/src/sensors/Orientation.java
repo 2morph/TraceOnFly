@@ -64,6 +64,7 @@ public class Orientation implements SensorEventListener{
   }
   //-------------------------------------------------------------------------
   public Vector getDiff() {
-    return diff;
+   if (diff!=null) return diff;
+   return new Vector(0,0,0);
   }
 }
