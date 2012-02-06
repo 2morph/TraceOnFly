@@ -97,15 +97,15 @@ public class ParseObj {
       for (Triangle t : ts) {
          lineArray[i++] = vs[t.v1-1].x/20;
          lineArray[i++] = vs[t.v1-1].y/20;
-         lineArray[i++] = vs[t.v1-1].z/20+20;
+         lineArray[i++] = vs[t.v1-1].z/20;
          
          lineArray[i++] = vs[t.v2-1].x/20;
          lineArray[i++] = vs[t.v2-1].y/20;
-         lineArray[i++] = vs[t.v2-1].z/20+20;
+         lineArray[i++] = vs[t.v2-1].z/20;
          
          lineArray[i++] = vs[t.v3-1].x/20;
          lineArray[i++] = vs[t.v3-1].y/20;
-         lineArray[i++] = vs[t.v3-1].z/20+20;
+         lineArray[i++] = vs[t.v3-1].z/20;
       }
       return lineArray;
    }

@@ -1,0 +1,5 @@
+MR Gamma Settings: Gamma - 2.2, Input Gamma - 1.0, Output Gamma - 2.2.
+
+VRay Gamma Settings(Where applicable): Gamma - 2.2, Input Gamma - 2.2, Output Gamma - 1.0.
+
+Thanks, Enjoy!

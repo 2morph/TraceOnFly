@@ -54,14 +54,21 @@ import android.opengl.GLU;
       gl.glColor4f(0, 1, 0, 1);
       
       gl.glLoadIdentity();
-      GLU.gluLookAt(gl, 0, 0, 4.2f, 0, 0, 0, 0, 1, 0);
       Vector erg = Orientation.get().getDiff();
-//      gl.glRotatef(onDrawFrameCounter,1,0,0); //Rotate the camera image
-//      gl.glRotatef((float)Math.sin(onDrawFrameCounter/20.0f)*40,0,1,0); //Rotate the camera image
-//      gl.glRotatef((float)Math.cos(onDrawFrameCounter/40.0f)*40,0,0,1); //Rotate the camera image
+      
+      
+      GLU.gluLookAt(gl, 0, 0, 0f, 0, 0, -5, 0, 1, 0);
       gl.glRotatef(erg.x,0,1,0); //Rotate the camera image
-      //gl.glRotatef((float)Math.sin(onDrawFrameCounter/20.0f)*40,0,1,0); //Rotate the camera image
-      //gl.glRotatef((float)Math.cos(onDrawFrameCounter/40.0f)*40,0,0,1); //Rotate the camera image
+      gl.glTranslatef(0, 0, -20);
+
+      gl.glRotatef(onDrawFrameCounter,1,0,0); //Rotate the camera image
+      gl.glRotatef((float)Math.sin(onDrawFrameCounter/20.0f)*40,0,1,0); //Rotate the camera image
+      gl.glRotatef((float)Math.cos(onDrawFrameCounter/40.0f)*40,0,0,1); //Rotate the camera image
+//     
+//      
+//      float rotx = (erg.z -90);
+//      gl.glRotatef(rotx,1,0,0); //Rotate the camera image
+//      //gl.glRotatef((float)Math.cos(onDrawFrameCounter/40.0f)*40,0,0,1); //Rotate the camera image
 
       gl.glNormal3f(0,0,1);
       gl.glDrawArrays(GL10.GL_LINE_LOOP, 0, camObjCoord.length/3);      
@@ -84,7 +91,7 @@ import android.opengl.GLU;
 
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
        
-       String obj = FileManager.loadObjFromFile("teapot.obj");
+       String obj = FileManager.loadObjFromFile("cessna.obj");
        camObjCoord = ParseObj.getLineLoopArray(ParseObj.getVertizesFromSting(obj), 
                                               ParseObj.getTrianglesFromSting(obj));
        

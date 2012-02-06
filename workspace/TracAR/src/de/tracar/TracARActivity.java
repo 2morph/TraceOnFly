@@ -4,15 +4,18 @@ package de.tracar;
 import math.Vector;
 import sensors.Orientation;
 import utils.FileManager;
+import utils.ServerConnection;
 import view.CameraPreview;
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
-import android.content.res.AssetManager;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class TracARActivity extends Activity {
@@ -21,26 +24,46 @@ public class TracARActivity extends Activity {
    public TextView textView;
    private Handler mHandler;
    private String message="no message";
-
-
+   
    @Override
    public void onCreate( Bundle savedInstanceState ) {
       super.onCreate( savedInstanceState );
-      FileManager fileManager = new FileManager(this);
-
+      FileManager myFileManager = new FileManager(this);
       setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE );
       requestWindowFeature(Window.FEATURE_NO_TITLE );
       getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN );
       
       setContentView( R.layout.main );
-     // textView.setText("bla");
       textView = (TextView)findViewById(R.id.textOrientation);
       mHandler = new Handler();
       mHandler.post(mUpdate);
       Orientation orientation = Orientation.init(this);
       orientation.enable(Orientation.ORIENTATION);
+      Button sendButton = (Button)this.findViewById(R.id.sendButton);
+      sendButton.setOnClickListener(new OnClickListener() {
+         public void onClick(View view) { onSendButtonClicked();}
+      });
+      Button shotButton = (Button)this.findViewById(R.id.shotPictureButton);
+      shotButton.setOnClickListener(new OnClickListener() {
+         public void onClick(View view) { onShotButtonClicked();}
+      });
+      Button exitButton = (Button)this.findViewById(R.id.exitButton);
+      exitButton.setOnClickListener(new OnClickListener() {
+         public void onClick(View view) { finish();}
+      });
+      
    }
 
+   private void onSendButtonClicked() {
+      ServerConnection connection = new ServerConnection();
+      connection.sendRequest();
+   }
+   
+   private void onShotButtonClicked() {
+      cameraView = (CameraPreview)findViewById(R.id.camPreview);
+      cameraView.getPicture();
+   }
+   
    private Runnable mUpdate = new Runnable() {
       public void run() {
          Vector erg = Orientation.get().getDiff();
