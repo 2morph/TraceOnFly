@@ -28,7 +28,7 @@ public class TracARActivity extends Activity {
    @Override
    public void onCreate( Bundle savedInstanceState ) {
       super.onCreate( savedInstanceState );
-      FileManager myFileManager = new FileManager(this);
+      new FileManager(this);
       setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE );
       requestWindowFeature(Window.FEATURE_NO_TITLE );
       getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN );
@@ -47,6 +47,8 @@ public class TracARActivity extends Activity {
       shotButton.setOnClickListener(new OnClickListener() {
          public void onClick(View view) { onShotButtonClicked();}
       });
+     
+      
       Button exitButton = (Button)this.findViewById(R.id.exitButton);
       exitButton.setOnClickListener(new OnClickListener() {
          public void onClick(View view) { finish();}
@@ -61,8 +63,9 @@ public class TracARActivity extends Activity {
    
    private void onShotButtonClicked() {
       cameraView = (CameraPreview)findViewById(R.id.camPreview);
-      cameraView.getPicture();
+      cameraView.focus();
    }
+   
    
    private Runnable mUpdate = new Runnable() {
       public void run() {

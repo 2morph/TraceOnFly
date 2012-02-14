@@ -13,4 +13,5 @@ ECHO using script: %script%
 ECHO write file : %imageFile%0001.png
 ECHO ******************************************
 cd %projectPath%
-%blenderPath%\blender.exe --background %defaultProject% --render-output %imageFile% --python %script% --render-frame 1
+REM %blenderPath%\blender.exe --background %defaultProject% --render-output %imageFile% --python %script% --render-frame 1
+%blenderPath%\blender.exe %defaultProject% --render-output %imageFile% --python %script% --render-frame 1

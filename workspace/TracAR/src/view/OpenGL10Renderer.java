@@ -91,7 +91,7 @@ import android.opengl.GLU;
 
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
        
-       String obj = FileManager.loadObjFromFile("cessna.obj");
+       String obj = FileManager.loadObjFromFile("teapot.obj");
        camObjCoord = ParseObj.getLineLoopArray(ParseObj.getVertizesFromSting(obj), 
                                               ParseObj.getTrianglesFromSting(obj));
        

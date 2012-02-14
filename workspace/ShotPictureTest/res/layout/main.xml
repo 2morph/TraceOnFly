@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:id="@+id/background"
+   android:orientation="vertical"
+   android:layout_width="fill_parent"
+   android:layout_height="fill_parent"
+   android:gravity="bottom"
+   >
 
-    <SurfaceView
-        android:id="@+id/preview"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/hello" />
+<Button
+ android:id="@+id/takepicture" 
+ android:layout_width="wrap_content"
+ android:layout_height="wrap_content"
+ android:text=" * Take Picture "
+ android:layout_gravity="right"
+ android:layout_margin="10px"
+ />
+<SurfaceView
+        android:id="@+id/camerapreview"
+        android:layout_width="fill_parent" 
+        android:layout_height="fill_parent"/>
 
 </LinearLayout>

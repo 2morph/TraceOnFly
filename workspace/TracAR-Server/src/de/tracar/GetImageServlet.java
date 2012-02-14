@@ -44,22 +44,27 @@ public class GetImageServlet extends HttpServlet {
 	 * @see Servlet#init(ServletConfig)
 	 */
 	public void init(ServletConfig config) throws ServletException {
-	   myFileManager = new FileManager();
+	   myFileManager = FileManager.getInstance();
 	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	   PythonScript myScript = new PythonScript("testscript.py");
+	   myScript.create(myFileManager.getPath() + "cam.jpg");
+	   myScript.save();
+	   myScript.executeWithBlender();
 	   PrintWriter writer = response.getWriter();
       writer.println("<html>");
-      writer.println("<head><title>Hello World Servlet</title></head>");
+      writer.println("<head><title>Hello World Servlet huhu </title></head>");
       writer.println("<body>");
-      writer.println("  <h1>Hello World from a Sevlet!</h1>");
+      writer.println("  <h1>Hello World from a Sevlet! </h1>");
       writer.println("<body>");
       writer.println("</html>");
       writer.close();  
       //render();
+      
 	}
 
 	/**
@@ -95,7 +100,7 @@ public class GetImageServlet extends HttpServlet {
 	            if(part.getName().equalsIgnoreCase(imageIdentifier)) {
 	               //filename = filename.substring(filename.lastIndexOf('/') + 1).substring(filename.lastIndexOf('\\') + 1); // MSIE fix.
 	               InputStream filecontent = part.getInputStream();
-	               String filename = "C:\\test\\" + "cam_" + sessionID + ".jpg";
+	               String filename = "cam_" + sessionID + ".jpg";
 	               myFileManager.saveFileFromStream(filecontent, imageSize, filename);
 	               imageReceived=true;
 	            }

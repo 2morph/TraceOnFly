@@ -6,6 +6,7 @@ import utils.FileManager;
 
 import android.content.Context;
 import android.hardware.Camera;
+import android.hardware.Camera.AutoFocusCallback;
 import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
@@ -13,9 +14,7 @@ import android.view.SurfaceView;
 
 public class CameraPreview extends SurfaceView implements Callback {
   private Camera camera;
-  static final int FOTO_MODE = 0;
-  boolean isPreviewOn = false;
-  
+  private boolean isPreviewOn = false;
 
 public CameraPreview(Context context, AttributeSet attrs) {
       super( context, attrs );
@@ -47,21 +46,35 @@ public CameraPreview(Context context, AttributeSet attrs) {
      camera.release();
   }
   
-  public void getPicture() {
-        camera.takePicture(null, mPictureCallback, mPictureCallback);
+  public void focus() {
+     camera.autoFocus(myAutoFocusCallback);
   }
+  
+  public void getPicture() {
+     camera.takePicture(null, mPictureCallback, mPictureCallback);
+     camera.cancelAutoFocus();
+  }
+  
+  AutoFocusCallback myAutoFocusCallback = new AutoFocusCallback(){
+
+     public void onAutoFocus(boolean arg0, Camera arg1) {
+      // TODO Auto-generated method stub
+      System.out.println("FOCUS!!!");
+      camera.takePicture(null, mPictureCallback, mPictureCallback);
+     }};
   
   Camera.PictureCallback mPictureCallback = new Camera.PictureCallback() {
 
      public void onPictureTaken(byte[] imageData, Camera c) {
-
         if (imageData != null) {
            System.out.println("__________________ length: " + imageData.length);
            FileManager.savePicture(imageData);
+           camera.cancelAutoFocus();
            camera.startPreview();
         }
      }
-
-     };
-  
+  };
+     
 }
+
+
